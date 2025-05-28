@@ -1,6 +1,4 @@
-# CloudStack + MLOps Homelab
-
-This project sets up a **home lab environment** combining Apache CloudStack and MLOps automation tools. It's designed to showcase DevOps, Cloud Infrastructure, and Platform Engineering practices using automation tools like Ansible and Python.
+# Virtual playground for getting reps in on platform engineering tech stacks
 
 ---
 
