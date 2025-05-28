@@ -26,7 +26,7 @@ Requires Ubuntu host with KVM/libvirt enabled.
 This script (`kubeflow_rewrite.py`) recursively scans Kubernetes YAML manifests and rewrites container image references to point to user-defined internal mirrors (e.g., Artifactory).
 
 ### Use Case
-Secure lab environments often require container images to be pulled from internal mirrors instead of public registries.
+Secure operating environments often require container images to be pulled from internal mirrors instead of public registries. It is admittedly out of place here with the other CloudStack stuff, but I have future plans for this project and realized this would come in handy eventually, so I wanted to keep it here for now.
 
 ### How It Works
 - Prompts user to specify replacements for: `quay.io`, `docker.io`, `gcr.io`, `ghcr.io`
