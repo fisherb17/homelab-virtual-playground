@@ -85,6 +85,7 @@ make test              # Placeholder for pytest
 make clean             # Remove backup/temp files
 ```
 
+---
 
 ## Fetch system stats and resources with Go
 
