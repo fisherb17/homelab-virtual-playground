@@ -2,17 +2,9 @@
 
 ---
 
-## Technologies Used
-- **Apache CloudStack** (in simulation mode)
-- **KVM + libvirt** for local virtualization
-- **Ansible** for automated setup
-- **Python** for Kubeflow manifests container registry rewrites
-
----
-
 ## CloudStack Homelab (via Ansible)
 
-The provided Ansible playbook (`cloudstack-homelab-ansible/main.yml`) automates setup of an Apache CloudStack management server in simulation mode. This avoids the need for real hypervisor nodes, making it perfect for education or testing.
+The provided Ansible playbook (`homelab-virtual-playground/main.yml`) automates setup of an Apache CloudStack management server in simulation mode. This avoids the need for real hypervisor nodes, making it perfect for education or testing.
 
 ### Features
 - Installs all dependencies (KVM, Java, MariaDB, etc.)
@@ -52,12 +44,3 @@ At runtime, the script will prompt you to enter replacement domains for common r
 quay.io replacement? artifacts.example.com/aid-quay.io
 ```
 
----
-
-## File Structure
-```
-cloudstack-homelab/
-├── main.yml                 # Ansible playbook
-├── kubeflow_rewrite.py         # Python utility script
-├── README.md
-```
