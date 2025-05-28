@@ -1,0 +1,25 @@
+# cloud-init/user-data.yaml
+# Used for automatic configuration of a VM for CloudStack homelab
+
+#cloud-config
+package_update: true
+packages:
+  - git
+  - ansible
+  - qemu-kvm
+  - libvirt-daemon-system
+  - libvirt-clients
+  - virtinst
+  - bridge-utils
+  - nfs-kernel-server
+  - python3-libvirt
+  - openjdk-11-jdk
+  - mariadb-server
+  - libmariadb-java
+  - maven
+
+runcmd:
+  - cd /opt
+  - git clone https://github.com/fisherb17/homelab-virtual-playground.git
+  - cd cloudstack-homelab
+  - ansible-playbook homelab-virtual-playground/main.yml
