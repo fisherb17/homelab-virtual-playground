@@ -85,3 +85,8 @@ make test              # Placeholder for pytest
 make clean             # Remove backup/temp files
 ```
 
+
+## Fetch system stats and resources with Go
+
+This is, again, somewhat unrelated to the other CloudStack stuff in this repo, but I wanted to keep it in this repo to remind myself to get more reps in with Go programming.
+
