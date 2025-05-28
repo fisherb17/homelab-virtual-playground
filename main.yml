@@ -1,0 +1,78 @@
+# homelab-virtual-playground/main.yml
+# Ansible Playbook to deploy Apache CloudStack in simulation mode for home lab testing
+
+- name: Set up Apache CloudStack Home Lab in Simulation Mode
+  hosts: localhost
+  become: yes
+  vars:
+    cloudstack_version: "4.18"
+    cloudstack_install_path: "/opt/cloudstack"
+
+  tasks:
+    - name: Ensure apt cache is up to date
+      apt:
+        update_cache: yes
+
+    - name: Install base dependencies
+      apt:
+        name:
+          - openjdk-11-jdk
+          - mariadb-server
+          - libmariadb-java
+          - git
+          - maven
+          - wget
+          - python3-libvirt
+          - qemu-kvm
+          - libvirt-daemon-system
+          - libvirt-clients
+          - virtinst
+          - bridge-utils
+          - nfs-kernel-server
+        state: present
+
+    - name: Enable and start libvirtd service
+      systemd:
+        name: libvirtd
+        enabled: yes
+        state: started
+
+    - name: Clone Apache CloudStack source repository
+      git:
+        repo: 'https://github.com/apache/cloudstack.git'
+        dest: "{{ cloudstack_install_path }}"
+        version: "{{ cloudstack_version }}"
+
+    - name: Build CloudStack with simulator enabled
+      shell: |
+        cd {{ cloudstack_install_path }}
+        mvn clean install -Pdeveloper -Dsimulator -DskipTests
+      args:
+        creates: "{{ cloudstack_install_path }}/dist/developer"
+
+    - name: Create placeholder systemvm image
+      file:
+        path: /var/lib/libvirt/images/systemvm.img
+        state: touch
+
+    - name: Launch CloudStack Management Server in simulation mode
+      shell: |
+        cd {{ cloudstack_install_path }}
+        nohup mvn -pl :cloudstack-management jetty:run &
+      async: 1800
+      poll: 0
+      environment:
+        MAVEN_OPTS: "-Xmx2g"
+
+    - name: Wait for CloudStack UI to be available on port 8080
+      wait_for:
+        port: 8080
+        delay: 15
+        timeout: 300
+
+    - name: Output CloudStack access info
+      debug:
+        msg: |
+          Apache CloudStack is now running in simulation mode.
+          Access the UI at: http://localhost:8080/client
+          Default credentials: admin / password
