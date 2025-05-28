@@ -82,11 +82,6 @@ def patch_yaml_lines(filepath):
             if match:
                 indent, key, image_path, rest = match.groups()
 
-                if "# aid-skip" in rest:
-                    print(f"Skipping line in {filepath} (marked with '# aid-skip')")
-                    new_lines.append(line)
-                    continue
-
                 new_image = rewrite_image(image_path)
                 if new_image != image_path:
                     patched = True
