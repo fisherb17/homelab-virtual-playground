@@ -15,19 +15,15 @@ func main() {
 }
 
 func printSystemStats() {
-	// Hostname
 	hostname, err := os.Hostname()
 	if err != nil {
 		hostname = "Unknown"
 	}
 
-	// IP Addresses
 	ipAddrs := getIPAddresses()
 
-	// OS Version (using `uname -a`)
 	osVersion := getOSVersion()
 
-	// Memory Stats
 	var memStats runtime.MemStats
 	runtime.ReadMemStats(&memStats)
 
@@ -45,7 +41,6 @@ func printSystemStats() {
 	fmt.Printf("Memory Allocated: %.2f MB\n", float64(memStats.Alloc)/(1024*1024))
 	fmt.Printf("Memory Sys:       %.2f MB\n", float64(memStats.Sys)/(1024*1024))
 
-	// Disk Stats
 	fs := &syscall.Statfs_t{}
 	err = syscall.Statfs(".", fs)
 	if err == nil {
