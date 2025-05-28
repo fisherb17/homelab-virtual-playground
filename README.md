@@ -31,9 +31,9 @@ Make sure you're running on an Ubuntu host with KVM/libvirt enabled.
 
 ---
 
-## ⚙️ MLOps Image Rewrite Utility (Python)
+## Kubeflow Manifests Image Rewrite Utility (Python)
 
-This script (`mlops_rewrite.py`) recursively scans Kubeflow YAML manifests and rewrites container image references to point to an internal Artifactory mirror.
+This script (`kubeflow_rewrite.py`) recursively scans Kubeflow YAML manifests and rewrites container image references to point to an internal Artifactory mirror.
 
 ### Example Use Case
 When migrating ML workflows to a secured lab environment, you often need to replace public container registry links (like `quay.io/...`) with internal mirrors (like `artifactory.company.com/...`).
